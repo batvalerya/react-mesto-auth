@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { api } from '../utils/api';
 import Header from './Header.js';
@@ -12,6 +13,8 @@ import ImagePopup from './ImagePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [currentUser, updateCurrentUser] = useState({});
 
@@ -139,15 +142,33 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header />
-        <Main 
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Switch>
+
+          <Route path="/main">
+            <Main 
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
+          </Route>
+          
+          {/* <Route path="/sign-up">
+            <Register />
+          </Route> */}
+
+          {/* <Route path="/sign-in">
+            <Login />
+          </Route> */}
+          <Route exact path="/">
+            {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in"/>}
+          </Route>
+          
+        </Switch>
+        
         <Footer />
       </div>
 
