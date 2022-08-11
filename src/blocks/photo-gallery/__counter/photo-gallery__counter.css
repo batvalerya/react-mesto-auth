@@ -1,0 +1,5 @@
+.photo-gallery__counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,8 @@
+.photo-gallery__item {
+    background-color: #fff;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}

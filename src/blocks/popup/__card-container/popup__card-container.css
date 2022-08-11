@@ -1,0 +1,12 @@
+.popup__card-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: calc((856/1280) * 100%);
+}
+
+@media (max-width: 1024px) {
+    .popup__card-container {
+        max-width: calc((240/320) * 100%);
+    }
+}
