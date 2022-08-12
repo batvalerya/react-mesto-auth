@@ -1,0 +1,26 @@
+.register__input {
+    width: 100%;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    border: none;
+    background-color: black;
+    color: #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 13px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 550px) {
+    .register__input {
+        max-width: 238px;
+    }
+}
+
+.register__input:focus {
+    outline: none;
+    border: 2px solid rgba(20, 20, 221, 0.4);
+    box-shadow: 3px -3px rgba(8, 8, 238, 0.2);
+    border-radius: 8px;
+}

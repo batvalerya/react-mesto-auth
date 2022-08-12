@@ -12,6 +12,8 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import ProtectedRoute from './ProtectedRoute';
+import Login from './Login';
+import Register from './Register';
 
 function App() {
 
@@ -146,7 +148,7 @@ function App() {
         <Switch>
 
           <ProtectedRoute 
-            path="/"
+            path="/main"
             loggedIn={loggedIn}
             component={Main}
             onEditProfile={handleEditProfileClick}
@@ -158,25 +160,14 @@ function App() {
             onCardDelete={handleCardDelete}
           />
 
-          {/* <Route path="/main">
-            <Main 
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />
-          </Route> */}
-          
-          {/* <Route path="/sign-up">
-            <Register />
-          </Route> */}
-
-          {/* <Route path="/sign-in">
+          <Route path="/sign-in">
             <Login />
-          </Route> */}
+          </Route>
+
+          <Route path="/sign-up">
+            <Register />
+          </Route>
+
           <Route exact path="/">
             {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in"/>}
           </Route>

@@ -1,0 +1,29 @@
+.register__submit {
+    min-width: 100%;
+    min-height: 50px;
+    background-color: #fff;
+    color: #000;
+    align-self: center;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    border-radius: 2px;
+    margin-top: 216px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.register__submit:hover {
+    transition: opacity 1s ease;
+    opacity: 0.8;
+}
+
+@media (max-width: 550px) {
+    .register__submit {
+        font-size: 14px;
+        line-height: 17px;
+        margin-top: 45px;
+        margin-bottom: 25px;
+    }
+}

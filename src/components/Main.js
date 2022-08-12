@@ -7,40 +7,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) {
 
-    const user = React.useContext(CurrentUserContext); 
-
-    // const [cards, setCards] = useState([]);
-
-    // function handleCardLike(card) {
-    //     const isLiked = card.likes.some(i => i._id === user._id);
-
-    //     api.changeLikeCardStatus(card._id, isLiked)
-    //         .then((newCard) => {
-    //             setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c
-    //             ));
-    //     });
-    // }
-
-    // function handleCardDelete(card) {
-    //     const isOwn = card.owner._id === user._id;
-
-    //     api.removeCard(card._id, isOwn)
-    //         .then((cards) => {
-    //             setCards(cards);
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     api.getInitialCards()
-    //     .then((res) => {
-    //         setCards(res)
-    //     })
-    //     .catch(() => {
-    //         console.log('Ошибка')
-    //     }
-    //     )}, []
-    // );
-
+    const user = React.useContext(CurrentUserContext);
 
     return(
         <main className="content">
