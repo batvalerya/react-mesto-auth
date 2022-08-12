@@ -1,0 +1,21 @@
+.header__email {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration: none;
+    padding-right: 24px;
+}
+
+.header__email:hover {
+  transition: opacity 1s ease;
+  opacity: 0.5;
+}
+
+@media (max-width: 550px) {
+    .header__email {
+        padding-right: 0px;
+        padding-bottom: 14px;
+    }
+}

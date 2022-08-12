@@ -56,4 +56,8 @@ body {
 @import url(./blocks/register/__input/register__input.css);
 @import url(./blocks/register/__submit/register__submit.css);
 @import url(./blocks/register/__signin-link/register__signin-link.css);
+@import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__info/header__info.css);
+@import url(./blocks/header/__email/header__email.css);
 
+@import url(./blocks/header/__link-logout/header__link-logout.css);

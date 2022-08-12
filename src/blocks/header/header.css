@@ -1,4 +1,7 @@
 .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     max-width: calc((880/1280) * 100%);
     margin: 0 auto;
     padding-top: 45px;
@@ -6,6 +9,8 @@
     border-bottom-style: solid;
     border-bottom-width: 1px;
     border-bottom-color: rgba(84,84,84,0.7);
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: #fff;
 }
 
 @media (max-width: 950px) {

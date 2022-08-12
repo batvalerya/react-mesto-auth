@@ -1,0 +1,13 @@
+.header__link-logout{
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: #A9A9A9;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration: none;
+}
+
+.header__link-logout:hover {
+  transition: opacity 1s ease;
+  opacity: 0.6;
+}

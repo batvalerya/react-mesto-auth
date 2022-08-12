@@ -1,0 +1,16 @@
+.header__info{
+    display: flex;
+    align-items: baseline;
+}
+
+@media (max-width: 950px) {
+    .header__info  {
+        margin-right: 27px;
+    }
+}
+
+@media (max-width: 550px) {
+    .header__info {
+        flex-direction: column;
+    }
+}
