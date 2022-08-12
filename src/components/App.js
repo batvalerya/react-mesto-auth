@@ -11,6 +11,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 
@@ -144,7 +145,20 @@ function App() {
         <Header />
         <Switch>
 
-          <Route path="/main">
+          <ProtectedRoute 
+            path="/"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+
+          {/* <Route path="/main">
             <Main 
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
@@ -154,7 +168,7 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
             />
-          </Route>
+          </Route> */}
           
           {/* <Route path="/sign-up">
             <Register />
