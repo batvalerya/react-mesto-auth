@@ -85,9 +85,9 @@ function App() {
   }
 
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  // function handleInfoTooltipClick() {
-  //   setInfoTooltipOpen(true)
-  // }
+  function handleInfoTooltipClick() {
+    setInfoTooltipOpen(true)
+  }
 
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   function handleAddPlaceClick() {
@@ -172,10 +172,12 @@ function App() {
           </Route>
 
           <Route path="/sign-up">
-            <Register />
+            <Register 
+              isOpen={handleInfoTooltipClick}
+            />
           </Route>
 
-          <Route exact path="/">
+          <Route path="*">
             {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in"/>}
           </Route>
           
@@ -185,9 +187,9 @@ function App() {
       </div>
 
       <InfoTooltip
-              onClose={closeAllPopups} 
-              onOverlayClick={handleOverlayClick}
-              isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopups} 
+        onOverlayClick={handleOverlayClick}
+        isOpen={isInfoTooltipOpen}
       />
 
       <EditProfilePopup 
