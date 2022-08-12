@@ -1,0 +1,12 @@
+.popup__response{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+@media (max-width: 550px) {
+    .popup__response {
+        padding-top: 50px;
+    }
+}

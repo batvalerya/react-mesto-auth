@@ -1,0 +1,20 @@
+.popup__info-tooltip {
+    max-width: 430px;
+    width: 100%;
+    min-height: 330px;
+    background-color: #fff;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
+    color: black;
+}
+
+@media (max-width: 550px) {
+    .popup__info-tooltip {
+        max-width: 280px;
+        width: 100%;
+        min-height: 308px;
+        margin: 123px auto;
+    }
+}

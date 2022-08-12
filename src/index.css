@@ -61,3 +61,7 @@ body {
 @import url(./blocks/header/__email/header__email.css);
 
 @import url(./blocks/header/__link-logout/header__link-logout.css);
+@import url(./blocks/popup/__info-tooltip/popup__info-tooltip.css);
+@import url(./blocks/popup/__response-img/popup__response-img.css);
+@import url(./blocks/popup/__response/popup__response.css);
+@import url(./blocks/popup/__response-title/popup__response-title.css);

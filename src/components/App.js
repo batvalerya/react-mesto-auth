@@ -14,6 +14,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
 
@@ -83,6 +84,11 @@ function App() {
     setEditProfilePopupOpen(true);
   }
 
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  // function handleInfoTooltipClick() {
+  //   setInfoTooltipOpen(true)
+  // }
+
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
@@ -98,6 +104,7 @@ function App() {
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setSelectedCard(null);
+    setInfoTooltipOpen(false);
   }
 
   function handleOverlayClick(event) {
@@ -176,6 +183,12 @@ function App() {
         
         <Footer />
       </div>
+
+      <InfoTooltip
+              onClose={closeAllPopups} 
+              onOverlayClick={handleOverlayClick}
+              isOpen={isInfoTooltipOpen}
+      />
 
       <EditProfilePopup 
         onClose={closeAllPopups} 
