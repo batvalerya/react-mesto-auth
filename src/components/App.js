@@ -50,7 +50,7 @@ function App() {
 
   useEffect(() => {
     tokenCheck()
-  });
+  }, []);
 
   const onLogin = (data) => {
     return userAuth.authorize(data)
