@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { api } from '../utils/api';
 import Header from './Header.js';
@@ -15,10 +15,68 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
+import * as userAuth from '../utils/userAuth.js';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [userData, setUserData] = useState({
+    email: '',
+  });
+
+  const [registerMessage, setRegisterMessage] = useState();
+
+  function updateRegisterMessage(res) {
+    setRegisterMessage(res);
+  };
+
+  const history = useHistory();
+
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('jwt')
+
+    if(!jwt) {
+      return;
+    } else {
+      return userAuth.getContent(jwt)
+        .then(({data}) => {
+          setLoggedIn(true);
+          setUserData({email: data.email});
+          history.push('/main');
+      })
+    }
+  }
+
+  useEffect(() => {
+    tokenCheck()
+  });
+
+  const onLogin = (data) => {
+    return userAuth.authorize(data)
+      .then(({token: jwt}) => {
+        localStorage.setItem('jwt', jwt);
+        setLoggedIn(true);
+        history.push('/main');
+    })
+  };
+
+  const onRegister = (data) => {
+    return userAuth.register(data)
+      .then(() => {
+        history.push('/signin')
+    })
+  };
+
+  const onLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem('jwt');
+    history.push('/signin')
+  }
+
+
+
+  
 
   const [currentUser, updateCurrentUser] = useState({});
 
@@ -151,7 +209,10 @@ function App() {
     <>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header 
+          onLogout={onLogout}
+          userData={userData}
+        />
         <Switch>
 
           <ProtectedRoute 
@@ -168,12 +229,16 @@ function App() {
           />
 
           <Route path="/sign-in">
-            <Login />
+            <Login 
+              onLogin={onLogin}
+            />
           </Route>
 
           <Route path="/sign-up">
-            <Register 
-              isOpen={handleInfoTooltipClick}
+            <Register
+              onRegister={onRegister} 
+              infoTooltipIsOpen={handleInfoTooltipClick}
+              updateRegisterMessage={updateRegisterMessage}
             />
           </Route>
 
@@ -190,6 +255,7 @@ function App() {
         onClose={closeAllPopups} 
         onOverlayClick={handleOverlayClick}
         isOpen={isInfoTooltipOpen}
+        registerMessage={registerMessage}
       />
 
       <EditProfilePopup 

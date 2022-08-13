@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as userAuth from '../utils/userAuth.js';
 
-function Register({ onRegister, isOpen }) {
+function Register({ onRegister, infoTooltipIsOpen, updateRegisterMessage }) {
 
     const [registerData, setRegisterData] = useState({
         email: '',
         password: ''
     });
-
-    // const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -22,18 +19,18 @@ function Register({ onRegister, isOpen }) {
     const handleChangeSubmit = (e) => {
         e.preventDefault();
 
-        userAuth.onRegister(registerData)
+        onRegister(registerData)
             .then(() => {
-                isOpen();
-                // setMessage('Вы успешно зарегистрировались!');
+                infoTooltipIsOpen();
+                updateRegisterMessage(true);
                 setRegisterData({
                     email: '',
                     password: ''
                 })
             })
             .catch(() => {
-                console.log('Ошибка')
-                // setMessage('Что-то пошло не так! Попробуйте ещё раз.')
+                updateRegisterMessage(false);
+                infoTooltipIsOpen();
             });
     }
 
