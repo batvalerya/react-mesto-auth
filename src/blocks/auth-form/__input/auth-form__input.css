@@ -1,4 +1,4 @@
-.register__input {
+.auth-form__input {
     width: 100%;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     border: none;
@@ -13,12 +13,12 @@
 }
 
 @media (max-width: 550px) {
-    .register__input {
+    .auth-form__input {
         max-width: 238px;
     }
 }
 
-.register__input:focus {
+.auth-form__input:focus {
     outline: none;
     border: 2px solid rgba(20, 20, 221, 0.4);
     box-shadow: 3px -3px rgba(8, 8, 238, 0.2);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AuthForm from './AuthForm';
 
 function Login({ onLogin }) {
 
@@ -35,38 +36,15 @@ function Login({ onLogin }) {
     }
 
     return(
-        <div className="register"> 
-            <h2 className="register__title">Вход</h2>
-            <form className="register__form" onSubmit={handleChangeSubmit}>
-                <input 
-                    className="register__input register__input_type_email"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    id="email"
-                    onChange={handleChange}
-                    value={loginData.email}
-                />
-                <span
-                    id="email-error"
-                    className="register__input-error"
-                ></span>
-
-                <input 
-                    className="register__input register__input_type_password"
-                    type="password"
-                    name="password"
-                    placeholder="Пароль"
-                    id="password"
-                    onChange={handleChange}
-                    value={loginData.password}
-                />
-                <span
-                    id="password-error"
-                    className="register__input-error"
-                ></span>
-                <button className="register__submit" type="submit">Войти</button>
-            </form>
+        <div className="auth-form"> 
+            <h2 className="auth-form__title">Вход</h2>
+            <AuthForm 
+                handleChangeSubmit={handleChangeSubmit}
+                handleChange={handleChange}
+                email={loginData.email}
+                password={loginData.password}
+                submitText={'Войти'}
+            />
         </div>
     )
 }

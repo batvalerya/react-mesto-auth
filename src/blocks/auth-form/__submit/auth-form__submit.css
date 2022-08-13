@@ -1,4 +1,4 @@
-.register__submit {
+.auth-form__submit {
     min-width: 100%;
     min-height: 50px;
     background-color: #fff;
@@ -14,13 +14,13 @@
     box-sizing: border-box;
 }
 
-.register__submit:hover {
+.auth-form__submit:hover {
     transition: opacity 1s ease;
     opacity: 0.8;
 }
 
 @media (max-width: 550px) {
-    .register__submit {
+    .auth-form__submit {
         font-size: 14px;
         line-height: 17px;
         margin-top: 45px;

@@ -13,6 +13,12 @@
   opacity: 0.5;
 }
 
+@media (max-width: 950px) {
+    .header__link  {
+        margin-right: 27px;
+    }
+}
+
 @media (max-width: 550px) {
     .header__link  {
         font-size: 14px;

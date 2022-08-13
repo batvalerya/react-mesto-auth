@@ -1,4 +1,4 @@
-.register__signin-link {
+.auth-form__signin-link {
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     color: white;
     font-weight: 400;
@@ -7,7 +7,7 @@
     text-decoration: none;
 }
 
-.register__signin-link:hover {
+.auth-form__signin-link:hover {
   transition: opacity 1s ease;
   opacity: 0.5;
 }

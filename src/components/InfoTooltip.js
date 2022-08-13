@@ -15,10 +15,7 @@ function InfoTooltip(props) {
                     >
                 </button>
                 <div className="popup__response">
-                    {/* <img className="popup__response-img" alt="Вы успешно зарегистрировались!" src={} />
-                    <h2 className="popup__respoinfoToltipSuccessnse-title">Вы успешно зарегистрировались!</h2> */}
-
-                    <img className="popup__response-img" alt="Что-то пошло не так! Попробуйте ещё раз." src={`${props.registerMessage ? infoToltipSuccess : infoToltipError}`} />
+                    <img className="popup__response-img" alt={`${props.registerMessage ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.' }`} src={`${props.registerMessage ? infoToltipSuccess : infoToltipError}`} />
                     <h2 className="popup__response-title">{`${props.registerMessage ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.' }`}</h2>
 
                 </div>
