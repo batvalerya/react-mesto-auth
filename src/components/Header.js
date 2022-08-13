@@ -15,7 +15,7 @@ function Header({ onLogout, userData:{email} }) {
 
             <Route path="/main">
                 <div className='header__info'>
-                    <a className='header__email' href="mailto:{email}">{email}</a>
+                    <a className='header__email' href={`mailto:${email}`}>{email}</a>
                     <Link to="/" className='header__link-logout' onClick={() => onLogout()}>Выйти</Link>
                 </div>
             </Route>

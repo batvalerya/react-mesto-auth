@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { api } from '../utils/api';
@@ -25,7 +24,7 @@ function App() {
     email: '',
   });
 
-  const [registerMessage, setRegisterMessage] = useState();
+  const [registerMessage, setRegisterMessage] = useState(false);
 
   function updateRegisterMessage(res) {
     setRegisterMessage(res);
@@ -45,6 +44,9 @@ function App() {
           setUserData({email: data.email});
           history.push('/main');
       })
+      .catch(() => {
+        console.log('Ошибка')
+      })
     }
   }
 
@@ -55,6 +57,7 @@ function App() {
   const onLogin = (data) => {
     return userAuth.authorize(data)
       .then(({token: jwt}) => {
+        setUserData({email: data.email});
         localStorage.setItem('jwt', jwt);
         setLoggedIn(true);
         history.push('/main');
