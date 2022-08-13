@@ -4,6 +4,6 @@
 
 **Проект: Mesto**
 
-* [Ссылка на проект: Mesto](https://batvalerya.github.io/mesto-react/)
+* [Ссылка на проект: Mesto](https://batvalerya.github.io/sign-in)
 
 
