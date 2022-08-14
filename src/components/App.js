@@ -18,19 +18,29 @@ import * as userAuth from '../utils/userAuth.js';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  //  переменные 
+  const [cards, setCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
 
+  const [currentUser, updateCurrentUser] = useState({});
   const [userData, setUserData] = useState({
     email: '',
   });
 
+  const [loggedIn, setLoggedIn] = useState(false);
   const [registerMessage, setRegisterMessage] = useState(false);
 
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+
+  const history = useHistory();
+
+  // функции
   function updateRegisterMessage(res) {
     setRegisterMessage(res);
   };
-
-  const history = useHistory();
 
   const tokenCheck = () => {
     const jwt = localStorage.getItem('jwt')
@@ -42,7 +52,7 @@ function App() {
         .then(({data}) => {
           setLoggedIn(true);
           setUserData({email: data.email});
-          history.push('/main');
+          history.push('/');
       })
       .catch(() => {
         console.log('Ошибка')
@@ -50,40 +60,38 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    tokenCheck()
-  }, []);
-
   const onLogin = (data) => {
     return userAuth.authorize(data)
       .then(({token: jwt}) => {
         setUserData({email: data.email});
         localStorage.setItem('jwt', jwt);
         setLoggedIn(true);
-        history.push('/main');
+        history.push('/');
     })
+      .catch(() => {
+        updateRegisterMessage(false);
+        handleInfoTooltipClick();
+    });
   };
 
   const onRegister = (data) => {
     return userAuth.register(data)
       .then(() => {
-        history.push('/signin')
+        handleInfoTooltipClick();
+        updateRegisterMessage(true);
+        history.push('/signin');
     })
+      .catch(() => {
+        updateRegisterMessage(false);
+        handleInfoTooltipClick();
+      })
   };
 
   const onLogout = () => {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
     history.push('/signin')
-  }
-
-
-
-  
-
-  const [currentUser, updateCurrentUser] = useState({});
-
-  const [cards, setCards] = useState([]);
+  };
 
   function handleCardLike(card) {
 
@@ -111,67 +119,8 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    api.getInitialCards()
-    .then((res) => {
-        setCards(res)
-    })
-    .catch(() => {
-        console.log('Ошибка')
-    }
-    )}, []
-  );
-
-  
-  useEffect(() => {
-    api.getUserInfo()
-        .then((result) => {
-            updateCurrentUser(result)
-        }
-    )
-        .catch(() => {
-            console.log('Ошибка')
-        }
-    )}, []
-  );
-
-  const [selectedCard, setSelectedCard] = useState(null);
   function handleCardClick(card) {
     setSelectedCard(card)
-  }
-
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
-  function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
-  }
-
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  function handleInfoTooltipClick() {
-    setInfoTooltipOpen(true)
-  }
-
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
-  function handleAddPlaceClick() {
-    setAddPlacePopupOpen(true);
-  }
-
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
-  function handleEditAvatarClick() {
-    setEditAvatarPopupOpen(true);
-  }
-
-  function closeAllPopups() {
-    setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);
-    setEditAvatarPopupOpen(false);
-    setSelectedCard(null);
-    setInfoTooltipOpen(false);
-  }
-
-  function handleOverlayClick(event) {
-    if (event.target === event.currentTarget) {
-      closeAllPopups()
-    }
   }
 
   function handleUpdateUser({name, about}) {
@@ -196,6 +145,36 @@ function App() {
       })
   }
 
+  function handleEditProfileClick() {
+    setEditProfilePopupOpen(true);
+  }
+  
+  function handleInfoTooltipClick() {
+    setInfoTooltipOpen(true)
+  }
+  
+  function handleAddPlaceClick() {
+    setAddPlacePopupOpen(true);
+  }
+  
+  function handleEditAvatarClick() {
+    setEditAvatarPopupOpen(true);
+  }
+
+  function closeAllPopups() {
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+    setSelectedCard(null);
+    setInfoTooltipOpen(false);
+  }
+
+  function handleOverlayClick(event) {
+    if (event.target === event.currentTarget) {
+      closeAllPopups()
+    }
+  }
+
   function handleAddPlaceSubmit({name, link}) {
     api.addNewCard({name, link})
       .then((newCard) => {
@@ -207,9 +186,35 @@ function App() {
       })
   }
 
+  //useEffect 
+  
+  useEffect(() => {
+    tokenCheck()
+  }, []);
+
+  useEffect(() => {
+    api.getInitialCards()
+    .then((res) => {
+        setCards(res)
+    })
+    .catch(() => {
+        console.log('Ошибка')
+    }
+    )}, []
+  );
+  
+  useEffect(() => {
+    api.getUserInfo()
+        .then((result) => {
+            updateCurrentUser(result)
+        })
+        .catch(() => {
+            console.log('Ошибка')
+        }
+    )}, []
+  );
 
   return (
-    <>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Header 
@@ -219,7 +224,7 @@ function App() {
         <Switch>
 
           <ProtectedRoute 
-            path="/main"
+            exact path="/"
             loggedIn={loggedIn}
             component={Main}
             onEditProfile={handleEditProfileClick}
@@ -240,13 +245,11 @@ function App() {
           <Route path="/sign-up">
             <Register
               onRegister={onRegister} 
-              infoTooltipIsOpen={handleInfoTooltipClick}
-              updateRegisterMessage={updateRegisterMessage}
             />
           </Route>
 
           <Route path="*">
-            {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in"/>}
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in"/>}
           </Route>
           
         </Switch>
@@ -259,6 +262,8 @@ function App() {
         onOverlayClick={handleOverlayClick}
         isOpen={isInfoTooltipOpen}
         registerMessage={registerMessage}
+        messageSuccess={'Вы успешно зарегистрировались!'}
+        messageError={'Что-то пошло не так! Попробуйте ещё раз.'}
       />
 
       <EditProfilePopup 
@@ -297,7 +302,6 @@ function App() {
         onOverlayClick={handleOverlayClick}
       />
     </CurrentUserContext.Provider>
-    </>
   );
 }
 

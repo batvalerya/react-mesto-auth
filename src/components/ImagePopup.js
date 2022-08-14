@@ -1,7 +1,7 @@
 function ImagePopup({card, onClose, onOverlayClick}) {
     return(
         <div 
-          className={`popup popup_card ${card !== null ? 'popup_is-opened' : ''}`}
+          className={`popup popup_card ${card !== null && 'popup_is-opened'}`}
           onClick={onOverlayClick}
           >
             <div className="popup__card-container">
@@ -12,10 +12,10 @@ function ImagePopup({card, onClose, onOverlayClick}) {
                 ></button>
               <img 
                 className="popup__card-img" 
-                src={card !== null ? card.link : ''}  
-                alt={card !== null ? card.name : ''} 
+                src={card?.link}  
+                alt={card?.name} 
                 />
-              <h2 className="popup__card-title">{card !== null ? card.name : ''}</h2>
+              <h2 className="popup__card-title">{card?.name}</h2>
             </div>
           </div>
     )

@@ -4,7 +4,7 @@ import infoToltipError from '../images/info-tooltip-error.svg';
 function InfoTooltip(props) {
     return(
         <div 
-            className={`popup ${props.isOpen  ? 'popup_is-opened' : ''}`}
+            className={`popup ${props.isOpen && 'popup_is-opened'}`}
             onClick={props.onOverlayClick}
             >
             <div className="popup__info-tooltip">
@@ -15,9 +15,8 @@ function InfoTooltip(props) {
                     >
                 </button>
                 <div className="popup__response">
-                    <img className="popup__response-img" alt={`${props.registerMessage ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.' }`} src={`${props.registerMessage ? infoToltipSuccess : infoToltipError}`} />
-                    <h2 className="popup__response-title">{`${props.registerMessage ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.' }`}</h2>
-
+                    <img className="popup__response-img" alt={`${props.registerMessage ? props.messageSuccess : props.messageError }`} src={`${props.registerMessage ? infoToltipSuccess : infoToltipError}`} />
+                    <h2 className="popup__response-title">{`${props.registerMessage ? props.messageSuccess : props.messageError }`}</h2>
                 </div>
             </div>
         </div>

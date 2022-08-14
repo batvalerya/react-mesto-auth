@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthForm from './AuthForm';
 
-function Register({ onRegister, infoTooltipIsOpen, updateRegisterMessage }) {
+function Register({ onRegister }) {
 
     const [registerData, setRegisterData] = useState({
         email: '',
@@ -20,19 +20,7 @@ function Register({ onRegister, infoTooltipIsOpen, updateRegisterMessage }) {
     const handleChangeSubmit = (e) => {
         e.preventDefault();
 
-        onRegister(registerData)
-            .then(() => {
-                infoTooltipIsOpen();
-                updateRegisterMessage(true);
-                setRegisterData({
-                    email: '',
-                    password: ''
-                })
-            })
-            .catch(() => {
-                updateRegisterMessage(false);
-                infoTooltipIsOpen();
-        });
+        onRegister(registerData);
     }
 
     return(
